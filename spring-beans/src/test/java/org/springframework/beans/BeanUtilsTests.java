@@ -50,7 +50,7 @@ public class BeanUtilsTests {
 		BeanUtils.instantiateClass(ArrayList.class);
 
 		try {
-			// give interface
+			// give interface  sad
 			BeanUtils.instantiateClass(List.class);
 			fail("Should have thrown FatalBeanException");
 		}
