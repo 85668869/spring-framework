@@ -85,6 +85,8 @@ public class XmlValidationModeDetector {
 	 * @throws IOException in case of I/O failure
 	 * @see #VALIDATION_DTD
 	 * @see #VALIDATION_XSD
+	 *
+	 *  检测方法：判断是否包含DOCTYPE，包含就是DTD，否则就是XSD
 	 */
 	public int detectValidationMode(InputStream inputStream) throws IOException {
 		// Peek into the file to look for DOCTYPE.
@@ -94,6 +96,7 @@ public class XmlValidationModeDetector {
 			String content;
 			while ((content = reader.readLine()) != null) {
 				content = consumeCommentTokens(content);
+				//读取的行是空或者是注释则跳过
 				if (this.inComment || !StringUtils.hasText(content)) {
 					continue;
 				}
@@ -101,6 +104,7 @@ public class XmlValidationModeDetector {
 					isDtdValidated = true;
 					break;
 				}
+				//读取到<开始符号跳出验证，验证模式一定会在开始符号之前
 				if (hasOpeningTag(content)) {
 					// End of meaningful data...
 					break;

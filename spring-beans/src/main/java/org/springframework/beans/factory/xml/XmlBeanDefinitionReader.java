@@ -263,6 +263,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				this.entityResolver = new ResourceEntityResolver(resourceLoader);
 			}
 			else {
+				//默认DelegatingEntityResolver实现
 				this.entityResolver = new DelegatingEntityResolver(getBeanClassLoader());
 			}
 		}
@@ -454,9 +455,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	protected int getValidationModeForResource(Resource resource) {
 		int validationModeToUse = getValidationMode();
+		//如果手动指定了，则使用指定的验证模式
 		if (validationModeToUse != VALIDATION_AUTO) {
 			return validationModeToUse;
 		}
+		//如果未指定则使用自动检测
 		int detectedMode = detectValidationMode(resource);
 		if (detectedMode != VALIDATION_AUTO) {
 			return detectedMode;
@@ -519,9 +522,25 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * 根据返回的Document注册bean信息
 	 */
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+		//使用DefaultBeanDefinitionDocumentReader实例化BeanDefinitionDocumentReader
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+
+		/**
+		 *
+		 * 在实例化XmlBeanDefinitionReader的时候需要将BeanDefinitionRegistry传入，
+		 * public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
+		 * 		super(registry);
+		 * }
+		 *
+		 * 默认使用继承自DefaultListableBeanFactory的子类，如XmlBeanFactory类:
+		 * private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);
+		 *
+		 */
+		//记录统计前BeanDefinition的加载个数
 		int countBefore = getRegistry().getBeanDefinitionCount();
+		//加载及注册bean
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+		//记录本次加载的BeanDefinition个数
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 

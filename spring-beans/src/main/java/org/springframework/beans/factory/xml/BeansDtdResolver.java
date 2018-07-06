@@ -57,10 +57,13 @@ public class BeansDtdResolver implements EntityResolver {
 			logger.trace("Trying to resolve XML entity with public ID [" + publicId +
 					"] and system ID [" + systemId + "]");
 		}
+		//DTD_EXTENSION = ".dtd"
 		if (systemId != null && systemId.endsWith(DTD_EXTENSION)) {
 			int lastPathSeparator = systemId.lastIndexOf('/');
+			//DTD_NAME = "spring-beans"
 			int dtdNameStart = systemId.indexOf(DTD_NAME, lastPathSeparator);
 			if (dtdNameStart != -1) {
+				//DTD_FILENAME = "spring-beans-2.0"
 				String dtdFile = DTD_FILENAME + DTD_EXTENSION;
 				if (logger.isTraceEnabled()) {
 					logger.trace("Trying to locate [" + dtdFile + "] in Spring jar on classpath");
