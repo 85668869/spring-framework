@@ -43,6 +43,9 @@ import java.net.URL;
  * @see PathResource
  * @see ByteArrayResource
  * @see InputStreamResource
+ *
+ * 抽象了所有Spring内部使用到的底层资源：File、URL、Classpath等，提供了不同资源到URL、URI、File类型的转换
+ *
  */
 public interface Resource extends InputStreamSource {
 
@@ -51,6 +54,7 @@ public interface Resource extends InputStreamSource {
 	 * <p>This method performs a definitive existence check, whereas the
 	 * existence of a {@code Resource} handle only guarantees a valid
 	 * descriptor handle.
+	 * 存在性
 	 */
 	boolean exists();
 
@@ -62,6 +66,7 @@ public interface Resource extends InputStreamSource {
 	 * However, a value of {@code false} is a definitive indication
 	 * that the resource content cannot be read.
 	 * @see #getInputStream()
+	 * 可读性
 	 */
 	boolean isReadable();
 
@@ -70,6 +75,7 @@ public interface Resource extends InputStreamSource {
 	 * If {@code true}, the InputStream cannot be read multiple times,
 	 * and must be read and closed to avoid resource leaks.
 	 * <p>Will be {@code false} for typical resource descriptors.
+	 * 是否打开状态
 	 */
 	boolean isOpen();
 
@@ -116,6 +122,7 @@ public interface Resource extends InputStreamSource {
 	 * @param relativePath the relative path (relative to this resource)
 	 * @return the resource handle for the relative resource
 	 * @throws IOException if the relative resource cannot be determined
+	 * 基于当前资源创建一个相对资源
 	 */
 	Resource createRelative(String relativePath) throws IOException;
 
@@ -124,6 +131,7 @@ public interface Resource extends InputStreamSource {
 	 * part of the path: for example, "myfile.txt".
 	 * <p>Returns {@code null} if this type of resource does not
 	 * have a filename.
+	 * 获取不带路径信息的文件名
 	 */
 	String getFilename();
 
@@ -133,6 +141,7 @@ public interface Resource extends InputStreamSource {
 	 * <p>Implementations are also encouraged to return this value
 	 * from their {@code toString} method.
 	 * @see Object#toString()
+	 * 用于在错误处理中的打印信息
 	 */
 	String getDescription();
 

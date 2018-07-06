@@ -36,6 +36,7 @@ import org.springframework.util.StringUtils;
  * @author Juergen Hoeller
  * @since 28.12.2003
  * @see java.io.File
+ * 文件资源
  */
 public class FileSystemResource extends AbstractResource implements WritableResource {
 

@@ -39,6 +39,7 @@ import org.springframework.util.StringUtils;
  * @since 28.12.2003
  * @see ClassLoader#getResourceAsStream(String)
  * @see Class#getResourceAsStream(String)
+ * Classpath资源
  */
 public class ClassPathResource extends AbstractFileResolvingResource {
 

@@ -1,0 +1,46 @@
+group 'org.springframework'
+version '4.3.19.BUILD-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+//task copyTestResources(type: Copy) {
+//    from "${projectDir}/src/main/resources"
+//    into "${buildDir}/classes/test"
+//}
+//processTestResources.dependsOn copyTestResources
+
+//idea {
+//    module {
+//        inheritOutputDirs = true
+//    }
+//}
+
+dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//    compile(project(":spring-aop"))
+    compile(project(":spring-beans"))
+//    compile(project(":spring-core"))
+//    compile(project(":spring-expression"))
+//    compile(files(project(":spring-core").cglibRepackJar))
+//    optional(project(":spring-instrument"))
+//    optional(project(":spring-oxm"))
+//    compile(project(":spring-messaging"))
+//    compile(project(":spring-tx"))
+    optional(project(":spring-context"))
+//    optional(project(":spring-jdbc"))
+//    optional(project(":spring-test"))
+      optional(project(":spring-beans-groovy"))
+}
+
+processResources {
+    from('src/main') {
+        include '**/*.xml'
+    }
+}

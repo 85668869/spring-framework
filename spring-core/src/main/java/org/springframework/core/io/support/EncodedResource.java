@@ -40,6 +40,8 @@ import org.springframework.util.ObjectUtils;
  * @see Resource#getInputStream()
  * @see java.io.Reader
  * @see java.nio.charset.Charset
+ *
+ * 对资源文件的编码进行处理，主要体现在getReader()方法
  */
 public class EncodedResource implements InputStreamSource {
 

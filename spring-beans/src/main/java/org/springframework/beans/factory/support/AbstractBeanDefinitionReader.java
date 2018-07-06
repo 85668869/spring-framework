@@ -50,7 +50,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	private final BeanDefinitionRegistry registry;
-
+	/**定义资源加载器，主要用于根据给定的资源文件地址返回对应的Resource */
 	private ResourceLoader resourceLoader;
 
 	private ClassLoader beanClassLoader;

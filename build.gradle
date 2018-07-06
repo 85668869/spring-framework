@@ -473,6 +473,7 @@ project("spring-context") {
 	apply plugin: "groovy"
 
 	dependencies {
+		compile(project(":spring-beans-groovy"))
 		compile(project(":spring-aop"))
 		compile(project(":spring-beans"))
 		compile(project(":spring-core"))
